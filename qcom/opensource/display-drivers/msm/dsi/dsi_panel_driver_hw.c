@@ -92,8 +92,15 @@ int dsi_panel_driver_adjust_brightness_type3(struct dsi_panel *panel, u32 bl_lvl
 {
 	struct dsi_backlight_config bl = panel->bl_config;
 	u32 reg_val = 0;
+	int is_need_hbm = 0;
+	int cur_hbm_mode = panel->spec_pdata->hbm_mode;
 
 	reg_val = bl.bl_min_level + (bl_lvl - 0) * (bl.bl_max_level - bl.bl_min_level) / (bl.brightness_max_level - 0);
+
+	is_need_hbm = reg_val >= 0x800;
+
+	if (cur_hbm_mode != is_need_hbm)
+		dsi_panel_set_hbm_mode_core(panel, is_need_hbm);
 
 	return reg_val;
 }
