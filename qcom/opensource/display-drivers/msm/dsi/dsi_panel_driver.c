@@ -889,9 +889,6 @@ int dsi_panel_driver_parse_dt(struct dsi_panel *panel,
 	rc = of_property_read_u32(np, "somc,pw-wait-after-off-touch-reset", &tmp);
 	spec_pdata->touch_reset_off = !rc ? tmp : 0;
 
-	rc = of_property_read_u32(np, "somc,brightness-max-level", &tmp);
-	spec_pdata->maxbrightness = !rc ? tmp : 0;
-
 	rc = of_property_read_u32(np, "somc,brightness-adjust-type", &tmp);
 	spec_pdata->br_adjust_type = !rc ? tmp : 0;
 
